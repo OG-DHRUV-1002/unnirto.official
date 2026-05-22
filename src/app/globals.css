@@ -1,0 +1,296 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bronze: #9E8A26;
+  --copper: #CD7F32;
+  --olive: #556B2F;
+  --obsidian: #0F1117;
+}
+
+* { box-sizing: border-box; padding: 0; margin: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: transparent;
+  color: #E5E7EB;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0F1117; }
+::-webkit-scrollbar-thumb { background: #9E8A26; border-radius: 2px; }
+::selection { background: rgba(158,138,38,0.25); color: #9b9575; }
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Hex clip */
+.hex-clip {
+  clip-path: polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);
+}
+
+/* Glow */
+.bronze-glow { box-shadow: 0 0 40px rgba(158,138,38,0.15), 0 0 80px rgba(158,138,38,0.05); }
+.bronze-glow-text { text-shadow: 0 0 40px rgba(158,138,38,0.5); }
+.olive-glow { box-shadow: 0 0 40px rgba(85,107,47,0.2); }
+
+/* Nav */
+.nav-blur {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Scanline */
+.scanline {
+  position: fixed;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(158,138,38,0.08), transparent);
+  animation: scanline 10s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes scanline {
+  0% { top: -2px; }
+  100% { top: 100vh; }
+}
+
+/* Particle canvas */
+#particle-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Marquee */
+.marquee-track {
+  display: flex;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Grid bg */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(158,138,38,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(158,138,38,0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Gradient border animated */
+.animated-border {
+  position: relative;
+}
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #9E8A26, #556B2F, #9E8A26);
+  background-size: 200% 200%;
+  animation: borderFlow 3s linear infinite;
+  z-index: -1;
+}
+@keyframes borderFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Number counter */
+.counter-value { font-variant-numeric: tabular-nums; }
+
+/* Line clamp */
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Tab underline */
+.tab-active {
+  position: relative;
+}
+.tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0; right: 0;
+  height: 2px;
+  background: #9E8A26;
+}
+
+/* Cursor blink */
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float { animation: float 5s ease-in-out infinite; }
+
+/* Pulse ring */
+@keyframes pulseRing {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(158,138,38,0.4);
+  animation: pulseRing 2s ease-out infinite;
+}
+
+/* Custom Animations */
+@keyframes panGrid {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -24px 24px;
+  }
+}
+
+.animate-pan-grid {
+  animation: panGrid 4s linear infinite;
+}
+
+@keyframes pulseAurora {
+  0%, 100% {
+    opacity: 0.05;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-aurora {
+  animation: pulseAurora 8s ease-in-out infinite;
+}
+
+/* Button Shine Sweep */
+.btn-shine-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine-sweep::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: all 0.6s ease;
+}
+
+.btn-shine-sweep:hover::after {
+  left: 150%;
+}
+
+/* ── Tech Venture Background Overlays ── */
+
+/* Glitch Micro-Animation */
+.tech-glitch-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -18;
+  opacity: 0;
+  animation: techGlitch 12s ease-in-out infinite;
+}
+
+.tech-glitch-overlay::before,
+.tech-glitch-overlay::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(158, 138, 38, 0.15);
+}
+
+.tech-glitch-overlay::before {
+  top: 30%;
+  animation: glitchShift1 12s ease-in-out infinite;
+}
+
+.tech-glitch-overlay::after {
+  top: 70%;
+  animation: glitchShift2 12s ease-in-out infinite;
+}
+
+@keyframes techGlitch {
+  0%, 90%, 100% { opacity: 0; }
+  92% { opacity: 1; }
+  93% { opacity: 0; }
+  94% { opacity: 0.8; }
+  95% { opacity: 0; }
+}
+
+@keyframes glitchShift1 {
+  0%, 90%, 100% { transform: translateX(0) scaleX(1); }
+  92% { transform: translateX(-5px) scaleX(1.02); }
+  93% { transform: translateX(3px) scaleX(0.98); }
+  95% { transform: translateX(0) scaleX(1); }
+}
+
+@keyframes glitchShift2 {
+  0%, 88%, 100% { transform: translateX(0) scaleX(1); }
+  90% { transform: translateX(4px) scaleX(1.01); }
+  91% { transform: translateX(-6px) scaleX(0.99); }
+  93% { transform: translateX(0) scaleX(1); }
+}
+
+/* Subtle CRT line texture */
+.crt-lines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -16;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
